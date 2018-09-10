@@ -91,8 +91,8 @@ void Console() {
 
 #define EXE_BASE 0x140000000
 
-#define FUNCTION_InitModules 0x140276a90
-#define FUNCTION_AddFunction 0x1402bba50
+#define FUNCTION_InitModules 0x140259410
+#define FUNCTION_AddFunction 0x1402BB7D0
 typedef int64_t* (__fastcall* InitModules)(int64_t scriptmoduleaddress);
 
 typedef int64_t* (__fastcall* AddFunction)(int64_t scriptmoduleaddress, char* FunctionName, int64_t function, int32_t SomeFlag);
@@ -123,14 +123,14 @@ void Hook() {
 		moduleBase = reinterpret_cast<UINT_PTR>(GetModuleHandle(NULL));
 	InitModules fInitModules = (InitModules)(moduleBase + (FUNCTION_InitModules - EXE_BASE));
 
-	auto source = moduleBase + (FUNCTION_InitModules - EXE_BASE);
-	uintptr_t ptr;
+	uintptr_t ptr = moduleBase + FUNCTION_InitModules - EXE_BASE;
+													  
 	//while (true) {
 	//	try
 	//	{
 			//Replace Me With Pattern Scanner
-			ptr = moduleBase + 0x140276a90 - EXE_BASE;//FindPattern(std::string("cc cc cc cc cc cc 48 89 6c 24 10 48 89 74 24 18") , std::string(""));
-													  //ptr += 6;
+	
+	//FindPattern(std::string("cc cc cc cc cc cc 48 89 6c 24 10 48 89 74 24 18") , std::string(""));
 	//	}
 	//catch (const std::exception&)
 	//{
