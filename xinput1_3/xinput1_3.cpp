@@ -86,8 +86,8 @@ void Console() {
 
 #define EXE_BASE 0x140000000
 
-#define FUNCTION_InitModules 0x140258B80
-#define FUNCTION_AddFunction 0x1402BB260
+#define FUNCTION_InitModules 0x140259AA0
+#define FUNCTION_AddFunction 0x1402BC090
 typedef int64_t* (__fastcall* InitModules)(int64_t scriptmoduleaddress);
 
 typedef int64_t* (__fastcall* AddFunction)(int64_t scriptmoduleaddress, char* FunctionName, int64_t function, int32_t SomeFlag);
@@ -119,7 +119,7 @@ void Hook() {
 	InitModules fInitModules = (InitModules)(moduleBase + (FUNCTION_InitModules - EXE_BASE));
 
 	uintptr_t ptr = moduleBase + FUNCTION_InitModules - EXE_BASE;
-													  
+	printf("BaseAddress: %p", moduleBase);
 	//while (true) {
 	//	try
 	//	{
